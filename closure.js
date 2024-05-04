@@ -22,10 +22,9 @@
 
 function x() {
     var b = 0;
-    var a = function () {
+    return function () {
         console.log("hi",b++);
     }
-    return a;
 }
 
 var c = x();
