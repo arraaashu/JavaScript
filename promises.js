@@ -1,25 +1,42 @@
-function CreateOrder(cart)
+function order(cart)
 {
-    return new Promise(function(resolve,reject)
-    {
     if(cart.size == 0)
         {
             const err = new Error("no cart items present");
-            reject(err);
+            return err;
         }
     const orderId = 77;
     if(orderId)
         {
-            resolve(orderId);
+            return orderId;
         }
+}
+function payment(orderId)
+{
+    return orderId*2000+1;
+}
+function CreateOrder(cart)
+{
+    return new Promise(function(resolve,reject)
+    {
+        const orderId = order(cart);
+        if(!orderId)
+           reject("error");
+        else
+        resolve(orderId); 
+    
 }).then(function(orderId)
 {
     return new Promise(function(resolve,reject) {
         if(!orderId)
             reject("not found");
         else
-            resolve(orderId*2000);
+            resolve(payment(orderId));
 });
+})
+.catch(function(error)
+{
+    console.log("error");
 });
 }
 
